@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Header } from "../components/layouts/header";
 // libs
 import { client } from "../libs/microcmsClient";
 // types
@@ -23,14 +24,18 @@ type Props = {
 
 export default function Home({ blogs, tags }: Props) {
   return (
-    <div>
-      {blogs.map((blog) => (
-        <div key={blog.id}>{blog.title}</div>
-      ))}
-      {tags.map((tag) => (
-        <div key={tag.id}>{tag.name}</div>
-      ))}
-      aaa
-    </div>
+    <>
+      <Header />
+
+      <div>
+        {blogs.map((blog) => (
+          <div key={blog.id}>{blog.title}</div>
+        ))}
+        {tags.map((tag) => (
+          <div key={tag.id}>{tag.name}</div>
+        ))}
+      </div>
+
+    </>
   );
 }
