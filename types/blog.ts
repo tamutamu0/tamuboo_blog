@@ -1,3 +1,10 @@
+import {
+    MicroCMSListResponse,
+    MicroCMSImage,
+    MicroCMSListContent
+} from 'microcms-js-sdk'
+
+
 export type Blog = {
     id: string;
     title: string;

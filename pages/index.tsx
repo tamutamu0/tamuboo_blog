@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Header } from "../components/layouts/header";
+import { Header } from "../components/layouts/Header";
 // libs
 import { client } from "../libs/microcmsClient";
 // types
