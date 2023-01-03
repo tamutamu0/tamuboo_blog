@@ -84,7 +84,7 @@ export const Header = memo(() => {
                                 textDecoration: 'none',
                             }}
                         >
-                            タムボーblog
+                            タムボー
                         </Typography>
                     </Stack>
                     <Search>

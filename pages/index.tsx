@@ -1,9 +1,11 @@
 import Link from "next/link";
+import Head from "next/head";
 import { Header } from "../components/layouts/Header";
 // libs
 import { client } from "../libs/microcmsClient";
 // types
 import type { Blog, Tag } from "../types/blog";
+import { Grid } from "@mui/material";
 
 export async function getServerSideProps() {
   const blog = await client.getList({ endpoint: "blog" });
@@ -25,7 +27,14 @@ type Props = {
 export default function Home({ blogs, tags }: Props) {
   return (
     <>
+      <Head>
+        <title>タムボー</title>
+      </Head>
       <Header />
+
+      <Grid>
+
+      </Grid>
 
       <div>
         {blogs.map((blog) => (
