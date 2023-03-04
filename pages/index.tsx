@@ -5,12 +5,12 @@ import { Header } from "../components/layouts/Header";
 import { client } from "../libs/microcmsClient";
 // types
 import type { Blog, Tag } from "../types/blog";
-import { Grid } from "@mui/material";
+import { CardMedia, Container, Grid, styled, Typography } from "@mui/material";
 
 export async function getServerSideProps() {
   const blog = await client.getList({ endpoint: "blog" });
   const tag = await client.getList({ endpoint: "tag" })
-  console.log(tag)
+  console.log(blog)
   return {
     props: {
       blogs: blog.contents,
@@ -24,6 +24,16 @@ type Props = {
   tags: Tag[],
 }
 
+const BlogPaper = styled('div')({
+  padding: '16px',
+  transition: 'all 0.2s',
+  '&:hover': {
+    boxShadow:
+      '1px 0px 5px -1px rgba(0,0,0,0.1), 0px 0px 5px 5px rgba(0,0,0,0.1), 0px 1px 5px 0px rgba(0,0,0,0.1)',
+    transform: 'translateY(-1px)',
+  },
+});
+
 export default function Home({ blogs, tags }: Props) {
   return (
     <>
@@ -32,18 +42,28 @@ export default function Home({ blogs, tags }: Props) {
       </Head>
       <Header />
 
-      <Grid>
-
-      </Grid>
-
-      <div>
-        {blogs.map((blog) => (
-          <div key={blog.id}>{blog.title}</div>
-        ))}
-        {tags.map((tag) => (
-          <div key={tag.id}>{tag.name}</div>
-        ))}
-      </div>
+      <Container>
+        <Grid container spacing={2}>
+          {blogs.map((blog) => (
+            <Grid item xs={12} sm={6} md={4} lg={3} key={blog.id}>
+              <Link href={`/blog/${blog.id}`} passHref >
+                <BlogPaper>
+                  <CardMedia
+                    component='img'
+                    width='100%'
+                    height='auto'
+                    image={blog.image.url}
+                    alt={blog.image.url}
+                  />
+                  <Typography>
+                    {blog.title}
+                  </Typography>
+                </BlogPaper>
+              </Link>
+            </Grid>
+          ))}
+        </Grid>
+      </Container>
 
     </>
   );

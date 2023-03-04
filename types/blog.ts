@@ -9,11 +9,17 @@ export type Blog = {
     id: string;
     title: string;
     tags: Tag[];
-    image: string;
+    image: BlogImage;
     createdAt: string;
     updatedAt: string;
     publishedAt: string;
     revisedAt: string;
+}
+
+export type BlogImage = {
+    url: string;
+    height: number;
+    weight: number;
 }
 
 export type Tag = {
