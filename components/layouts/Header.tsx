@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { memo, useState, } from "react";
 import { styled, alpha } from '@mui/material/styles';
 import {
     AppBar,
@@ -16,10 +16,8 @@ import {
     Stack,
     Link
 } from "@mui/material"
-import { white } from "@mui/material/colors"
 import PetsRoundedIcon from '@mui/icons-material/PetsRounded';
 import SearchIcon from '@mui/icons-material/Search';
-
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -72,13 +70,28 @@ const linkTextStyle = {
 }
 
 const headerLinks = [
-    { no: 1, name: 'Home', path: '/' },
     { no: 2, name: 'Blog', path: '/' },
     { no: 3, name: 'Profile', path: '/profile' },
-    { no: 4, name: 'Contact', path: '/contact' },
+    { no: 4, name: 'ShowCase', path: '/profile' },
+    { no: 5, name: 'Contact', path: '/contact' },
 ];
 // eslint-disable-next-line react/display-name
 export const Header = memo(() => {
+    const [dogClickCount, setDogClickCount] = useState(0);
+    const handleDogClick = () => {
+        if (dogClickCount === 4) {
+            console.log(`
+            / \__
+            (    @\___
+             /         O
+            /   (_____/
+           /_____/   U`)
+            setDogClickCount(0);
+        } else {
+            setDogClickCount(dogClickCount + 1);
+        }
+    };
+
     return (
         <AppBar position="static">
             <Container maxWidth="lg">
@@ -87,7 +100,10 @@ export const Header = memo(() => {
                         direction="row"
                         alignItems="center"
                     >
-                        <PetsRoundedIcon sx={{ mr: 1 }} />
+                        <PetsRoundedIcon
+                            sx={{ mr: 1 }}
+                            id="dog"
+                            onClick={handleDogClick} />
                         <Typography
                             variant="h6"
                             noWrap
@@ -95,14 +111,15 @@ export const Header = memo(() => {
                             href="/"
                             sx={linkTextStyle}
                         >
-                            たむぼー
+                            tamu.boo
                         </Typography>
                     </Stack>
                     <Stack
                         direction="row"
                         alignItems="center"
-                        spacing={5}
+                        spacing={3}
                     >
+                        {/* ヘッダーの各種リンク作成 */}
                         {
                             headerLinks.map((link) => (
                                 <Link key={link.no} href={link.path} sx={linkTextStyle} >

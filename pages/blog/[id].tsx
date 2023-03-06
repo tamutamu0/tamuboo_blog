@@ -1,20 +1,20 @@
 import Link from "next/link";
 import Head from "next/head";
-import { Header } from "components/layouts/Header";
+import { Header } from "../../components/layouts/Header";
 // libs
-import { client } from "libs/microcmsClient";
+import { client } from "../../libs/microcmsClient";
+// types
+import type { Blog, Tag } from "../../types/blog";
 // mui
-import { Container, Typography } from "@mui/material";
+import { Box, Container, Typography } from "@mui/material";
 
+type props = {
+    blog: Blog
+}
 
-export default function BlogId({ blog }) {
+export default function BlogId({ blog }: props) {
     return (
         <>
-            <Head>
-                <title>タムボー</title>
-            </Head>
-            <Header />
-
             <Container>
                 <main>
                     <Typography variant="h4" component="h1" gutterBottom>
@@ -31,6 +31,7 @@ export default function BlogId({ blog }) {
 
         </>
     );
+
 }
 
 // 静的生成のためのパスを指定します

@@ -8,6 +8,7 @@ import {
 export type Blog = {
     id: string;
     title: string;
+    content: string;
     tags: Tag[];
     image: BlogImage;
     createdAt: string;

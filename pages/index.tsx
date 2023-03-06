@@ -37,11 +37,6 @@ const BlogPaper = styled('div')({
 export default function Home({ blogs, tags }: Props) {
   return (
     <>
-      <Head>
-        <title>たむぼー</title>
-      </Head>
-      <Header />
-
       <Container sx={{ pt: "2%" }}>
         <Typography variant="h5" color="initial">
           最近の投稿
