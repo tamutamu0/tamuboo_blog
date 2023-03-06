@@ -38,12 +38,12 @@ export default function BlogId({ blog }: props) {
 export const getStaticPaths = async () => {
     const data = await client.get({ endpoint: "blog" });
 
-    const paths = data.contents.map((content) => `/blog/${content.id}`);
+    const paths = data.contents.map((content: any) => `/blog/${content.id}`);
     return { paths, fallback: false };
 };
 
 // データをテンプレートに受け渡す部分の処理を記述します
-export const getStaticProps = async (context) => {
+export const getStaticProps = async (context: any) => {
     const id = context.params.id;
     const data = await client.get({ endpoint: "blog", contentId: id });
 
