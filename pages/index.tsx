@@ -38,11 +38,14 @@ export default function Home({ blogs, tags }: Props) {
   return (
     <>
       <Head>
-        <title>タムボー</title>
+        <title>たむぼー</title>
       </Head>
       <Header />
 
       <Container sx={{ pt: "2%" }}>
+        <Typography variant="h5" color="initial">
+          最近の投稿
+        </Typography>
         <Grid container spacing={0}>
           {blogs.map((blog) => (
             <Grid item xs={12} sm={6} md={4} lg={4} key={blog.id}>

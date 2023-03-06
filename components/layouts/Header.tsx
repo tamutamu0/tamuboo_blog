@@ -14,7 +14,9 @@ import {
     Tooltip,
     MenuItem,
     Stack,
+    Link
 } from "@mui/material"
+import { white } from "@mui/material/colors"
 import PetsRoundedIcon from '@mui/icons-material/PetsRounded';
 import SearchIcon from '@mui/icons-material/Search';
 
@@ -60,6 +62,21 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
 }));
 
+const linkTextStyle = {
+    fontFamily: 'monospace',
+    fontWight: 700,
+    alignItems: 'flex-end',
+    letterSpacing: '.3rem',
+    color: 'inherit',
+    textDecoration: 'none',
+}
+
+const headerLinks = [
+    { no: 1, name: 'Home', path: '/' },
+    { no: 2, name: 'Blog', path: '/' },
+    { no: 3, name: 'Profile', path: '/profile' },
+    { no: 4, name: 'Contact', path: '/contact' },
+];
 // eslint-disable-next-line react/display-name
 export const Header = memo(() => {
     return (
@@ -76,16 +93,23 @@ export const Header = memo(() => {
                             noWrap
                             component="a"
                             href="/"
-                            sx={{
-                                fontFamily: 'monospace',
-                                fontWight: 700,
-                                letterSpacing: '.3rem',
-                                color: 'inherit',
-                                textDecoration: 'none',
-                            }}
+                            sx={linkTextStyle}
                         >
-                            タムボー
+                            たむぼー
                         </Typography>
+                    </Stack>
+                    <Stack
+                        direction="row"
+                        alignItems="center"
+                        spacing={5}
+                    >
+                        {
+                            headerLinks.map((link) => (
+                                <Link key={link.no} href={link.path} sx={linkTextStyle} >
+                                    {link.name}
+                                </Link>
+                            ))
+                        }
                     </Stack>
                     <Search>
                         <SearchIconWrapper>
@@ -98,6 +122,6 @@ export const Header = memo(() => {
                     </Search>
                 </Toolbar>
             </Container>
-        </AppBar>
+        </AppBar >
     )
 });
