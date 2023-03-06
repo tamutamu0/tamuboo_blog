@@ -42,10 +42,10 @@ export default function Home({ blogs, tags }: Props) {
       </Head>
       <Header />
 
-      <Container>
-        <Grid container spacing={2}>
+      <Container sx={{ pt: "2%" }}>
+        <Grid container spacing={0}>
           {blogs.map((blog) => (
-            <Grid item xs={12} sm={6} md={4} lg={3} key={blog.id}>
+            <Grid item xs={12} sm={6} md={4} lg={4} key={blog.id}>
               <Link href={`/blog/${blog.id}`} passHref >
                 <BlogPaper>
                   <CardMedia
