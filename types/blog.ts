@@ -26,6 +26,7 @@ export type BlogImage = {
 export type Tag = {
     id: string;
     name: string;
+    icon: string;
     createdAt: string;
     updatedAt: string;
     publishedAt: string;
