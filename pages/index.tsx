@@ -5,7 +5,10 @@ import { Header } from "../components/layouts/Header";
 import { client } from "../libs/microcmsClient";
 // types
 import type { Blog, Tag } from "../types/blog";
+// mui
 import { CardMedia, Container, Grid, styled, Typography } from "@mui/material";
+// components
+import MyHead from "../components/elements/MyHead";
 
 export async function getServerSideProps() {
   const blog = await client.getList({ endpoint: "blog" });
@@ -37,32 +40,30 @@ const BlogPaper = styled('div')({
 export default function Home({ blogs, tags }: Props) {
   return (
     <>
-      <Container sx={{ pt: "2%" }}>
-        <Typography variant="h5" color="initial">
-          最近の投稿
-        </Typography>
-        <Grid container spacing={0}>
-          {blogs.map((blog) => (
-            <Grid item xs={12} sm={6} md={4} lg={4} key={blog.id}>
-              <Link href={`/blog/${blog.id}`} passHref >
-                <BlogPaper>
-                  <CardMedia
-                    component='img'
-                    width='100%'
-                    height='auto'
-                    image={blog.image.url}
-                    alt={blog.image.url}
-                  />
-                  <Typography>
-                    {blog.title}
-                  </Typography>
-                </BlogPaper>
-              </Link>
-            </Grid>
-          ))}
-        </Grid>
-      </Container>
-
+      <MyHead />
+      <Typography variant="h5" color="initial">
+        最近の投稿
+      </Typography>
+      <Grid container spacing={0}>
+        {blogs.map((blog) => (
+          <Grid item xs={12} sm={6} md={4} lg={4} key={blog.id}>
+            <Link href={`/blog/${blog.id}`} passHref >
+              <BlogPaper>
+                <CardMedia
+                  component='img'
+                  width='100%'
+                  height='auto'
+                  image={blog.image.url}
+                  alt={blog.image.url}
+                />
+                <Typography>
+                  {blog.title}
+                </Typography>
+              </BlogPaper>
+            </Link>
+          </Grid>
+        ))}
+      </Grid>
     </>
   );
 }

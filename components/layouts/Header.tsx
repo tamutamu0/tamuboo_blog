@@ -72,7 +72,7 @@ const linkTextStyle = {
 const headerLinks = [
     { no: 2, name: 'Blog', path: '/' },
     { no: 3, name: 'Profile', path: '/profile' },
-    { no: 4, name: 'ShowCase', path: '/profile' },
+    { no: 4, name: 'ShowCase', path: '/showcase' },
     { no: 5, name: 'Contact', path: '/contact' },
 ];
 // eslint-disable-next-line react/display-name
@@ -83,9 +83,9 @@ export const Header = memo(() => {
             console.log(`
             / \__
             (    @\___
-             /         O
+            /         O
             /   (_____/
-           /_____/   U`)
+            /_____/   U`)
             setDogClickCount(0);
         } else {
             setDogClickCount(dogClickCount + 1);

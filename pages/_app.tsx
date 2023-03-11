@@ -9,14 +9,10 @@ import { Container } from '@mui/material';
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
-      <Head>
-        <title>tamu.boo</title>
-      </Head>
       <Header />
-      <Container>
+      <Container sx={{ p: 4 }}>
         <Component {...pageProps} />
       </Container>
-
     </>
   )
 }

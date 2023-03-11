@@ -11,6 +11,7 @@ import { Box, BoxProps, Container, Grid, Typography } from "@mui/material";
 import { Stack } from "@mui/system";
 // 
 import { getDateStr } from "../../utils/getDateStr";
+import MyHead from "../../components/elements/MyHead";
 
 type Props = {
     blog: Blog
@@ -58,6 +59,10 @@ const TagList = (props: TagListProps) => {
 export default function BlogId({ blog }: Props) {
     return (
         <>
+            <MyHead
+                pageTitle={blog.title}
+                pageThumbnailUrl={blog.image.url}
+            />
             <Container>
                 <main>
                     <Typography variant="h4" component="h1" gutterBottom>

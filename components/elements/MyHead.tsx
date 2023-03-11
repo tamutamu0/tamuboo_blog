@@ -10,7 +10,7 @@ interface MyHeadProps {
 const MyHead: NextPage<MyHeadProps> = ({ pageTitle, pageThumbnailUrl, pageDescription }) => {
     const defaultTitle = "タムボー"
 
-    const title = pageTitle ? `${pageTitle} | ${defaultTitle} : ${defaultTitle}` : defaultTitle
+    const title = pageTitle ? `${pageTitle} | ${defaultTitle} ` : defaultTitle
     const thumbnailUrl = pageThumbnailUrl
     const description = pageDescription
 
