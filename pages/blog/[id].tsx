@@ -73,13 +73,7 @@ export default function BlogId({ blog }: Props) {
                         sx={{
                             bgcolor: "background.paper",
                             borderRadius: "12px",
-                            p: {
-                                xs: 1,
-                                sm: 2,
-                                md: 4,
-                                lg: 6,
-                                xl: 8,
-                            }
+                            p: 4
                         }}
                     >
                         <TagList
@@ -87,13 +81,7 @@ export default function BlogId({ blog }: Props) {
                         />
                         <Box
                             sx={{
-                                pt: {
-                                    xs: 1,
-                                    sm: 2,
-                                    md: 4,
-                                    lg: 6,
-                                    xl: 8,
-                                }
+                                pt: 3
                             }}
                             dangerouslySetInnerHTML={{ __html: `${blog.content}` }} />
                     </Box>
