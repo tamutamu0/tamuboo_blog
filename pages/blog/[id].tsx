@@ -43,7 +43,7 @@ const TagList = (props: TagListProps) => {
                             }}
                         >
                             <Image
-                                src={tag.icon}
+                                src={tag.icon.url}
                                 alt=""
                                 width={20}
                                 height={25} />
