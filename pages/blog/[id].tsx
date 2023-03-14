@@ -12,48 +12,10 @@ import { Stack } from "@mui/system";
 // 
 import { getDateStr } from "../../utils/getDateStr";
 import MyHead from "../../components/elements/MyHead";
+import TagList from "../../components/elements/TagList";
 
 type Props = {
     blog: Blog
-}
-
-interface TagListProps extends BoxProps {
-    tags: Tag[];
-}
-
-const TagList = (props: TagListProps) => {
-    const { tags, ...rest } = props;
-    return (
-        <Stack
-            direction="row"
-            spacing={1}
-        >
-            {
-                tags.map(tag => (
-                    <Link key={tag.id} href={`/topics/${tag.name}`} passHref >
-                        <Stack
-                            direction="row"
-                            spacing={1}
-                            sx={{
-                                p: 0.8,
-                                border: '1px solid',
-                                borderColor: 'lightgray',
-                                borderRadius: '20px',
-                                maxWidth: "fit-content"
-                            }}
-                        >
-                            <Image
-                                src={tag.icon.url}
-                                alt=""
-                                width={20}
-                                height={25} />
-                            <Typography variant="body2">{tag.name}</Typography>
-                        </Stack>
-                    </Link>
-                ))
-            }
-        </Stack>
-    )
 }
 
 export default function BlogId({ blog }: Props) {
