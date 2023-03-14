@@ -1,14 +1,9 @@
-import Link from "next/link";
-import Head from "next/head";
-import Image from "next/image";
-import { Header } from "../../components/layouts/Header";
 // libs
 import { client } from "../../libs/microcmsClient";
 // types
-import type { Blog, Tag } from "../../types/blog";
+import type { Blog } from "../../types/blog";
 // mui
-import { Box, BoxProps, Container, Grid, Typography } from "@mui/material";
-import { Stack } from "@mui/system";
+import { Box, Container, Typography } from "@mui/material";
 // 
 import { getDateStr } from "../../utils/getDateStr";
 import MyHead from "../../components/elements/MyHead";
