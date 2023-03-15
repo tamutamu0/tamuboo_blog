@@ -1,30 +1,24 @@
 import Link from "next/link";
-import Head from "next/head";
-import { Header } from "../components/layouts/Header";
 // libs
 import { client } from "../libs/microcmsClient";
 // types
-import type { Blog, Tag } from "../types/blog";
+import type { Blog } from "../types/blog";
 // mui
-import { CardMedia, Container, Grid, styled, Typography } from "@mui/material";
+import { CardMedia, Grid, styled, Typography } from "@mui/material";
 // components
 import MyHead from "../components/elements/MyHead";
 
 export async function getServerSideProps() {
   const blog = await client.getList({ endpoint: "blog" });
-  const tag = await client.getList({ endpoint: "tag" })
-  console.log(blog)
   return {
     props: {
-      blogs: blog.contents,
-      tags: tag.contents,
+      blogs: blog.contents
     }
   };
 }
 
 type Props = {
-  blogs: Blog[],
-  tags: Tag[],
+  blogs: Blog[]
 }
 
 const BlogPaper = styled('div')({
@@ -37,13 +31,10 @@ const BlogPaper = styled('div')({
   },
 });
 
-export default function Home({ blogs, tags }: Props) {
+export default function Home({ blogs }: Props) {
   return (
     <>
       <MyHead />
-      <Typography variant="h5" color="initial">
-        最近の投稿
-      </Typography>
       <Grid container spacing={0}>
         {blogs.map((blog) => (
           <Grid item xs={12} sm={6} md={4} lg={4} key={blog.id}>

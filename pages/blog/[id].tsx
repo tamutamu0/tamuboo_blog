@@ -7,7 +7,7 @@ import { Box, Container, Typography } from "@mui/material";
 // 
 import { getDateStr } from "../../utils/getDateStr";
 import MyHead from "../../components/elements/MyHead";
-import TagList from "../../components/elements/TagList";
+import TagList from "../../components/layouts/TagList";
 
 type Props = {
     blog: Blog

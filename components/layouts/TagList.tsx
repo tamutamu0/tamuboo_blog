@@ -17,7 +17,7 @@ const TagList = (props: TagListProps) => {
         >
             {
                 tags.map(tag => (
-                    <Link key={tag.id} href={`/topics/${tag.name}`} passHref >
+                    <Link key={tag.id} href={`/blog/tag/${tag.id}`} passHref >
                         <Stack
                             direction="row"
                             spacing={1}
