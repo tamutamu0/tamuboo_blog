@@ -1,15 +1,17 @@
+import Image from "next/image";
 import Link from "next/link";
 // libs
 import { client } from "../../../libs/microcmsClient";
 // types
-import type { Blog } from "../../../types/blog";
+import type { Blog, Tag } from "../../../types/blog";
 // mui
-import { CardMedia, Grid, styled, Typography } from "@mui/material";
+import { CardMedia, Grid, styled, Stack, Typography, Container } from "@mui/material";
 // 
 import MyHead from "../../../components/elements/MyHead";
 
 type Props = {
-    blogs: Blog[]
+    blogs: Blog[],
+    tag: Tag
 }
 
 const BlogPaper = styled('div')({
@@ -22,10 +24,24 @@ const BlogPaper = styled('div')({
     },
 });
 
-export default function BlogPostsByTag({ blogs }: Props) {
+export default function BlogPostsByTag({ blogs, tag }: Props) {
     return (
         <>
             <MyHead />
+            <Container sx={{ paddingBottom: '10px' }}>
+                <Stack
+                    direction="row"
+                    spacing={2}
+                >
+                    <Image
+                        src={tag.icon.url}
+                        alt=""
+                        width={48}
+                        height={48} />
+                    <Typography variant="h4">{tag.name}</Typography>
+                </Stack>
+            </Container>
+
             <Grid container spacing={0}>
                 {blogs.map((blog) => (
                     <Grid item xs={12} sm={6} md={4} lg={4} key={blog.id}>
@@ -68,10 +84,15 @@ export const getStaticProps = async (context: any) => {
             filters: `tags[contains]${id}`
         }
     });
+    const tagData = await client.get({
+        endpoint: "tag",
+        contentId: id
+    })
 
     return {
         props: {
             blogs: blogsData.contents,
+            tag: tagData
         },
     };
 };
