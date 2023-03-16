@@ -1,12 +1,14 @@
+import Image from "next/image";
 import Link from "next/link";
 // libs
 import { client } from "../libs/microcmsClient";
 // types
 import type { Blog } from "../types/blog";
 // mui
-import { CardMedia, Grid, styled, Typography } from "@mui/material";
+import { Box, CardMedia, Container, Grid, styled, Typography, Paper } from "@mui/material";
 // components
 import MyHead from "../components/elements/MyHead";
+import TagList from "../components/layouts/TagList";
 
 export async function getServerSideProps() {
   const blog = await client.getList({ endpoint: "blog" });
@@ -22,36 +24,45 @@ type Props = {
 }
 
 const BlogPaper = styled('div')({
-  padding: '16px',
+  padding: '1px',
+  backgroundColor: 'white',
+  borderRadius: '15px',
   transition: 'all 0.2s',
+  boxShadow: '3px 3px 20px -10px #777777',
   '&:hover': {
     boxShadow:
-      '1px 0px 5px -1px rgba(0,0,0,0.1), 0px 0px 5px 5px rgba(0,0,0,0.1), 0px 1px 5px 0px rgba(0,0,0,0.1)',
+      '3px 3px 20px -5px #777777',
     transform: 'translateY(-1px)',
   },
+  height: '100%'
 });
 
 export default function Home({ blogs }: Props) {
   return (
     <>
       <MyHead />
-      <Grid container spacing={0}>
+      <Grid container spacing={4}>
         {blogs.map((blog) => (
           <Grid item xs={12} sm={6} md={4} lg={4} key={blog.id}>
             <Link href={`/blog/${blog.id}`} passHref >
               <BlogPaper>
-                <CardMedia
-                  component='img'
-                  width='100%'
-                  height='auto'
-                  image={blog.image.url}
-                  alt={blog.image.url}
-                />
-                <Typography>
-                  {blog.title}
-                </Typography>
+                <Box sx={{ borderRadius: '15px 15px 0px 0px', overflow: 'hidden' }}>
+                  <CardMedia
+                    component='img'
+                    width='100%'
+                    height='auto'
+                    image={blog.image.url}
+                    alt={blog.image.url}
+                  />
+                </Box>
+                <Container sx={{ paddingTop: '10px' }}>
+                  <Typography variant="subtitle1">
+                    {blog.title}
+                  </Typography>
+                </Container>
               </BlogPaper>
             </Link>
+
           </Grid>
         ))}
       </Grid>
