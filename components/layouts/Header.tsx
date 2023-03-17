@@ -8,7 +8,7 @@ import {
     Link
 } from "@mui/material"
 import SiteLogo from "../elements/SiteLogo";
-import SearchBox from "../elements/SearchBox";
+import { useRouter } from "next/router";
 
 type headerLinksProps = {
     no: number,
@@ -24,6 +24,10 @@ const headerLinks = [
 ];
 
 const HeaderLinks = () => {
+    const router = useRouter();
+    const path = router.pathname;
+    const basePath = '/' + path.split('/')[1];
+
     return (
         <Box >
             <Stack
@@ -38,29 +42,34 @@ const HeaderLinks = () => {
                             fontFamily: 'monospace',
                             fontWight: 700,
                             alignItems: 'flex-end',
-                            letterSpacing: '.3rem',
+                            letterSpacing: '.11rem',
                             color: 'inherit',
                             textDecoration: 'none',
+                            ...(basePath === link.path && {
+                                // 現在のパスと一致する場合、下線を表示
+                                borderBottom: '2px solid',
+                            }),
                         }} >
                             {link.name}
                         </Link>
                     ))
                 }
-            </Stack>
-        </Box>
+            </Stack >
+        </Box >
     )
 }
 
-// eslint-disable-next-line react/display-name
 export const Header = () => {
 
     return (
         <AppBar position="static">
             <Container maxWidth="lg">
-                <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                <Toolbar sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }} >
                     <SiteLogo />
-                    <HeaderLinks />
-                    <SearchBox />
+                    {/* <SearchBox /> */}
+                    <Box sx={{ alignSelf: 'flex-start', paddingTop: 2, paddingBottom: 1 }}>
+                        <HeaderLinks />
+                    </Box>
                 </Toolbar>
             </Container>
         </AppBar >
