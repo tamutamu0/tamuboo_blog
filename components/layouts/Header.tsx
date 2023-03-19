@@ -5,10 +5,14 @@ import {
     Toolbar,
     Container,
     Stack,
-    Link
+    Link,
+    useScrollTrigger,
+    styled,
+    Typography
 } from "@mui/material"
 import SiteLogo from "../elements/SiteLogo";
 import { useRouter } from "next/router";
+
 
 type headerLinksProps = {
     no: number,
@@ -41,20 +45,22 @@ const HeaderLinks = () => {
                 {/* ヘッダーの各種リンク作成 */}
                 {
                     headerLinks.map((link) => (
-                        <Link key={link.no} href={link.path} sx={{
-                            fontFamily: 'monospace',
-                            fontWight: 700,
-                            alignItems: 'flex-end',
-                            letterSpacing: '.11rem',
-                            color: 'inherit',
-                            textDecoration: 'none',
-                            paddingBottom: '0.5rem',
-                            ...(modFirstDir === link.path && {
-                                // 現在のパスと一致する場合、下線を表示
-                                borderBottom: '2px solid',
-                            }),
-                        }} >
-                            {link.name}
+                        <Link key={link.no} href={link.path}  >
+                            <Typography
+                                fontFamily="monospace"
+                                letterSpacing=".05rem"
+                                sx={{
+                                    paddingBottom: '0.5rem',
+                                    color: 'lightblue',
+                                    ...(modFirstDir === link.path && {
+                                        borderBottom: '2px solid',
+                                        fontWeight: 'bold',
+                                        color: 'white',
+                                    }),
+                                }}
+                            >
+                                {link.name}
+                            </Typography>
                         </Link>
                     ))
                 }
@@ -63,19 +69,26 @@ const HeaderLinks = () => {
     )
 }
 
+
 export const Header = () => {
+    const headerFirstLineHeight: number = 40;
+    const trigger = useScrollTrigger({
+        disableHysteresis: true,
+        threshold: headerFirstLineHeight - 1,   //ヘッダ1行目の高さ-1を閾値とした方が追従が自然となる
+    });
 
     return (
-        <AppBar position="static">
-            <Container maxWidth="lg">
-                <Toolbar sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }} >
+        <>
+            <AppBar position="static" elevation={0} sx={{ height: headerFirstLineHeight }}>
+                <Container maxWidth="lg" sx={{ paddingTop: .5 }}>
                     <SiteLogo />
-                    {/* <SearchBox /> */}
-                    <Box sx={{ alignSelf: 'flex-start', paddingTop: 2, paddingBottom: 1 }}>
-                        <HeaderLinks />
-                    </Box>
-                </Toolbar>
-            </Container>
-        </AppBar >
+                </Container>
+            </AppBar >
+            <AppBar position={trigger ? "fixed" : "static"} elevation={0} sx={{ height: 40 }}>
+                <Container maxWidth="lg" sx={{ paddingTop: .5 }}>
+                    <HeaderLinks />
+                </Container>
+            </AppBar>
+        </>
     )
 };
