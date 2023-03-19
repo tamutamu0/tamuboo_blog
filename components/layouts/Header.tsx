@@ -24,9 +24,12 @@ const headerLinks = [
 ];
 
 const HeaderLinks = () => {
+    // 現在ページに対応するヘッダーリンクに下線をつけるため、パスの1層目を取得する
     const router = useRouter();
     const path = router.pathname;
-    const basePath = '/' + path.split('/')[1];
+    const firstDir = '/' + path.split('/')[1];
+    // ルートディレクトリと"/blog"ディレクトリは同一として扱うための処理
+    const modFirstDir = firstDir.replace('blog', '');
 
     return (
         <Box >
@@ -45,7 +48,8 @@ const HeaderLinks = () => {
                             letterSpacing: '.11rem',
                             color: 'inherit',
                             textDecoration: 'none',
-                            ...(basePath === link.path && {
+                            paddingBottom: '0.5rem',
+                            ...(modFirstDir === link.path && {
                                 // 現在のパスと一致する場合、下線を表示
                                 borderBottom: '2px solid',
                             }),
