@@ -4,6 +4,7 @@
 
 - Next.js
 - TypeScript
+- MUI
 
 ## CMS
 
