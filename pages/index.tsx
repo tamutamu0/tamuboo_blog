@@ -1,26 +1,18 @@
-import Image from "next/image";
 import Link from "next/link";
 // libs
 import { client } from "../libs/microcmsClient";
 // types
 import type { Blog } from "../types/blog";
 // mui
-import { Box, CardMedia, Container, Grid, styled, Typography, Paper } from "@mui/material";
+import { Box, CardMedia, Container, Grid, styled, Typography } from "@mui/material";
 // components
 import MyHead from "../components/elements/MyHead";
-import TagList from "../components/layouts/TagList";
-
-export async function getServerSideProps() {
-  const blog = await client.getList({ endpoint: "blog" });
-  return {
-    props: {
-      blogs: blog.contents
-    }
-  };
-}
+import Pagination from "../components/elements/Pagination"
+import { PER_PAGE } from "../setting";
 
 type Props = {
-  blogs: Blog[]
+  blogs: Blog[],
+  totalCount: number,
 }
 
 const BlogPaper = styled('div')({
@@ -37,7 +29,7 @@ const BlogPaper = styled('div')({
   height: '100%'
 });
 
-export default function Home({ blogs }: Props) {
+export default function Home({ blogs, totalCount }: Props) {
   return (
     <>
       <MyHead />
@@ -62,10 +54,29 @@ export default function Home({ blogs }: Props) {
                 </Container>
               </BlogPaper>
             </Link>
-
           </Grid>
         ))}
       </Grid>
+      <Pagination
+        currentPage={1}
+        totalCount={totalCount}
+      />
     </>
   );
+}
+
+export const getStaticProps = async () => {
+  const blog = await client.getList({
+    endpoint: "blog",
+    queries: {
+      offset: 0,
+      limit: PER_PAGE
+    }
+  });
+  return {
+    props: {
+      blogs: blog.contents,
+      totalCount: blog.totalCount
+    }
+  };
 }
