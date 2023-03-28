@@ -4,6 +4,7 @@ import { client } from "../../libs/microcmsClient";
 import type { Blog } from "../../types/blog";
 // mui
 import { Box, Container, Typography } from "@mui/material";
+import {load as cheerioLoad} from "cheerio";
 // 
 import { getDateStr } from "../../utils/getDateStr";
 import MyHead from "../../components/elements/MyHead";
@@ -61,6 +62,17 @@ export const getStaticPaths = async () => {
 export const getStaticProps = async (context: any) => {
     const id = context.params.id;
     const data = await client.get({ endpoint: "blog", contentId: id });
+
+    //htmlパース処理
+    const $ = cheerioLoad(data.content);
+    $("h1,h2").each((_,element) => {
+        $(element).addClass("text-2xl mt-5 mb-3 font-bold")
+    });
+    $("a").each((_,element) => {
+        $(element).addClass("text-blue-600 hover:text-blue-800 visited:text-purple-600")
+    });
+    data.content = $.html();
+    console.log($.html());
 
     return {
         props: {
