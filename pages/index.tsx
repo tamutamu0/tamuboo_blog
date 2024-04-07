@@ -16,6 +16,7 @@ import {
 import MyHead from "../components/elements/MyHead";
 import Pagination from "../components/elements/Pagination";
 import { PER_PAGE } from "../setting";
+import Image from "next/image";
 
 type Props = {
   blogs: Blog[];
@@ -47,13 +48,15 @@ export default function Home({ blogs, totalCount }: Props) {
                 <Box
                   sx={{ borderRadius: "15px 15px 0px 0px", overflow: "hidden" }}
                 >
-                  <CardMedia
-                    component="img"
-                    width="100%"
-                    height="auto"
-                    image={blog.image.url}
-                    alt={blog.image.url}
-                  />
+                  <CardMedia sx={{ position: "relative" }}>
+                    <Image
+                      src={blog.image.url}
+                      alt={blog.image.url}
+                      width={500}
+                      height={500}
+                      style={{ objectFit: "cover" }}
+                    />
+                  </CardMedia>
                 </Box>
                 <Container sx={{ paddingTop: "10px" }}>
                   <Typography variant="subtitle1">{blog.title}</Typography>
