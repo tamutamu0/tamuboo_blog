@@ -1,6 +1,5 @@
 import "tailwindcss/tailwind.css";
 import type { AppProps } from "next/app";
-import "types/globals.css";
 import Head from "next/head";
 import { Header } from "../components/layouts/Header";
 import { useState } from "react";
